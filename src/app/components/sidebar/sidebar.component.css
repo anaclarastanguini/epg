@@ -1,0 +1,24 @@
+*:before, *:after{
+    display: none !important;
+}
+
+.logoTamanho  {
+    width: 140px !important
+}
+
+.centralizar {
+    text-align: center
+}
+
+.btnActive {
+    background-color: white !important;
+    box-shadow: none !important;
+    color: #000 !important
+}
+
+/* Quando for clicado */
+.btnActive:focus {
+    background-color: #3a7485 !important;
+    box-shadow: none !important;
+    color: #fff !important
+}

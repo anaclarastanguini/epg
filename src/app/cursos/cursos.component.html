@@ -1,0 +1,121 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="title">Cadastrar curso</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Título</label>
+                                    <input type="text" class="form-control" [(ngModel)]="curso">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Descrição</label>
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <textarea class="form-control" [(ngModel)]="descricao" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Preço</label>
+                                    <input type="number" class="form-control" [(ngModel)]="preco">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div *ngIf="currentFileUpload" class="progress" style="width:400px">
+                                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                                        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                                        {{progress.percentage}}%</div>
+                                </div>
+                                <label class="btn btn-default">
+                                    <input type="file" (change)="selectFile($event)">
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" *ngIf="cadastrarbtn" (click)="cadastrar()" class="btn btn-roxo pull-right">Cadastrar</button>
+                        <button class="btn btn-roxo pull-left" *ngIf="editarbtn" (click)="cancelar()">Cancelar</button>
+                        <button class="btn btn-verde pull-right " *ngIf="editarbtn" (click)="salvar()">Salvar</button>
+                        <div class="clearfix"></div>
+                        <!--Alerta de sucesso na exclusão do curso-->
+                        <div class="alert alert-success" *ngIf="sucesso">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                O curso foi excluído com sucesso!
+                            </div>
+                        </div>
+                        <!--Alerta de erro de cadastro/edição-->
+                        <div class="alert alert-danger" *ngIf="erro">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">error_outline</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                <b>Erro:</b> Confira se todos os campos foram preenchidos corretamente!
+                            </div>
+                        </div>
+                        <!--Alerta de sucesso na alteração do aluno-->
+                        <div class="alert alert-success" *ngIf="sucesso2">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                Ação concluída com êxito!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngFor="let curso of cursos | async" class="col-md-4">
+    <div class="card card-profile">
+        <div class="card-avatar">
+            <a href="#">
+                <img class="img" [src]="curso.imagem" />
+            </a>
+        </div>
+        <div class="content">
+            <h4 class="card-title">{{curso.titulo}}</h4>
+            <p class="card-content">
+                {{curso.descricao}}
+            </p>
+            <a href="#pablo" class="btn btn-roxo btn-round">R${{curso.preco}}</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <button (click)="editar(curso)" class="btn btn-verde btn-round">Editar</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-roxo btn-round" (click)="excluir(curso)">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<!--Título do card-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="title">Cadastrar alunos</h3>
+                    </div>
+                    <!--Cadastro de alunos-->
+                    <div class="card-content table-responsive">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Nome do aluno</label>
+                                    <input type="text" class="form-control" [(ngModel)]="aluno">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">E-mail</label>
+                                    <input type="text" class="form-control" [(ngModel)]="email">
+                                </div>
+                            </div>
+                        </div>
+                        <!--Botao p/ cadastrar aluno-->
+                        <div class="row">
+                            <div class="col-md-12" *ngIf="cadastrarbtn">
+                                <button class="btn btn-roxo" (click)="cadastrar()">Cadastrar</button>
+                            </div>
+                            <!--Botao p/ cancelar edição de aluno-->
+                            <div class="col-md-6" *ngIf="editarbtn">
+                                <button class="btn btn-block btn-roxo" (click)="cancelar()">Cancelar</button>
+                            </div>
+                            <!--Botao p/ salvar edição de aluno-->
+                            <div class="col-md-6" *ngIf="editarbtn">
+                                <button class="btn btn-block btn-roxo" (click)="salvar()">Salvar</button>
+                            </div>
+                        </div>
+                        <!--Alerta de sucesso de cadastro-->
+                        <div class="alert alert-success" *ngIf="sucesso">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                O aluno foi cadastrado com sucesso!
+                            </div>
+                        </div>
+                        <!--Alerta de erro de cadastro/edição-->
+                        <div class="alert alert-danger" *ngIf="erro">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">error_outline</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                <b>Erro:</b> Confira se todos os campos foram preenchidos corretamente!
+                            </div>
+                        </div>
+                        <!--Alerta de sucesso na exclusão do aluno-->
+                        <div class="alert alert-success" *ngIf="sucesso3">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                O aluno foi excluído com sucesso!
+                            </div>
+                        </div>
+                        <!--Alerta de sucesso na alteração do aluno-->
+                        <div class="alert alert-success" *ngIf="sucesso2">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                O aluno foi alterado com sucesso!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Título do card-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="title">Alunos</h3>
+                    </div>
+                    <!--Exibição da lista de alunos-->
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-roxo">
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>E-mail</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let aluno of alunos | async">
+                                    <td>{{aluno.aluno}}</td>
+                                    <td>{{aluno.email}}</td>
+                                    <td>
+                                        <button class="btn btn-roxo" (click)="excluir(aluno)">Excluir</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-verde" (click)="editar(aluno)">Editar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

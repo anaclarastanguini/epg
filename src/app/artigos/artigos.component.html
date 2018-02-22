@@ -1,0 +1,135 @@
+<!--Título do card-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="title">Publicar artigos</h3>
+                    </div>
+                    <!--Publicar artigos-->
+                    <div class="card-content table-responsive">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">Título</label>
+                                    <input type="text" class="form-control" [(ngModel)]="titulo">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <textarea class="form-control" [(ngModel)]="artigo" placeholder="Texto" rows="5"></textarea>
+                                </div>
+                            </div>
+                                                    </div>
+                        <!--Botao p/ publicar artigo-->
+                        <div class="row">
+                            <div class="col-md-12" *ngIf="cadastrarbtn">
+                                <button class="btn btn-roxo" (click)="cadastrar()">Publicar</button>
+                            </div>
+                            <!--Botao p/ cancelar edição do artigo-->
+                            <div class="col-md-6" *ngIf="editarbtn">
+                                <button class="btn btn-block btn-roxo" (click)="cancelar()">Cancelar</button>
+                            </div>
+                            <!--Botao p/ salvar edição do artigo-->
+                            <div class="col-md-6" *ngIf="editarbtn">
+                                <button class="btn btn-block btn-roxo" (click)="salvar()">Salvar</button>
+                            </div>
+                        </div>
+                        <!--Alerta de sucesso da publicação do reacdo-->
+                        <div class="alert alert-success" *ngIf="sucesso">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                O artigo foi publicado com sucesso!
+                            </div>
+                        </div>
+                        <!--Alerta de erro de publicação/edição-->
+                        <div class="alert alert-danger" *ngIf="erro">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">error_outline</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                <b>Erro:</b> Confira se todos os campos foram preenchidos corretamente!
+                            </div>
+                        </div>
+                        <!--Alerta de exclusão na publicação do artigo-->
+                        <div class="alert alert-success" *ngIf="sucesso3">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                O artigo foi excluído com sucesso!
+                            </div>
+                        </div>
+                        <!--Alerta de sucesso na alteração do artigo-->
+                        <div class="alert alert-success" *ngIf="sucesso2">
+                            <div class="container-fluid">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="material-icons">clear</i>
+                                    </span>
+                                </button>
+                                O artigo foi alterado com sucesso!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Título do card-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="title">Artigos</h3>
+                    </div>
+                    <!--Exibição da lista de artigos-->
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-roxo">
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Artigo</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let artigo of artigos | async">
+                                    <td>{{artigo.titulo}}</td>
+                                    <td>{{artigo.artigo}}</td>
+                                    <td>
+                                        <button class="btn btn-verde" (click)="excluir(artigo)">Excluir</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-roxo" (click)="editar(artigo)">Editar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
